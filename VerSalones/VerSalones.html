@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiSalónOn | Salones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../CSS/VerSalon.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">MiSalónOnline</div>
+      <div class="nav-links">
+        <a href="../Index.html">Inicio</a>
+        <a href="#" class="active">Salones</a>
+        <a href="#">Contacto</a>
+        <a href="#" class="login-btn">Iniciar sesión</a>
+      </div>
+    </nav>
+
+    <header class="titulo">
+      <h1>Nuestros Salones</h1>
+      <p>Descubrí nuestros salones y elegí el ideal para tu evento.</p>
+    </header>
+
+    <section class="salon-selector" id="salonSelector"></section>
+
+    <section class="salon-detail-card">
+      <div class="detail-gallery">
+        <img id="mainImage" class="main-image" src="" alt="" />
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+
+      <div class="detail-info">
+        <div class="info-header">
+          <h2 id="salonName"></h2>
+          <div class="rating" id="salonRating"></div>
+        </div>
+
+        <div class="info-grid">
+          <div>
+            <span class="info-label">Precio por evento</span>
+            <p id="salonPrice"></p>
+          </div>
+          <div>
+            <span class="info-label">Capacidad máxima</span>
+            <p id="salonCapacity"></p>
+          </div>
+          <div>
+            <span class="info-label">Mesas disponibles</span>
+            <p id="salonTables"></p>
+          </div>
+          <div>
+            <span class="info-label">Ubicación</span>
+            <p id="salonLocation"></p>
+          </div>
+        </div>
+
+        <div class="description" id="salonDescription"></div>
+
+        <ul class="services-list" id="servicesList"></ul>
+      </div>
+    </section>
+    <script src="../JS/VerSalonesjs.js"></script>
+  </body>
+</html>

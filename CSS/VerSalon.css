@@ -1,0 +1,353 @@
+:root {
+  --emerald: #047857;
+  --emerald-light: #10B981;
+  --white: #FFFFFF;
+  --gray-light: #F3F4F6;
+  --dark: #1F2937;
+  --shadow: 0 15px 35px rgba(31, 41, 55, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, var(--gray-light) 0%, #ffffff 100%);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: var(--emerald);
+  color: var(--white);
+  box-shadow: 0 6px 18px rgba(4, 120, 87, 0.2);
+}
+
+.nav-brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 0.85;
+}
+
+.login-btn {
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.titulo {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+}
+
+.titulo h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--emerald);
+  margin-bottom: 0.8rem;
+}
+
+.titulo p {
+  font-size: 1.05rem;
+  color: #4b5563;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.salon-selector {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(1200px, 92%);
+  margin: 0 auto 3rem;
+}
+
+.salon-card {
+  background: var(--white);
+  border: 2px solid transparent;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.salon-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.salon-card.active {
+  border-color: var(--emerald);
+  box-shadow: 0 20px 40px rgba(4, 120, 87, 0.18);
+}
+
+.salon-card img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.salon-card h3 {
+  padding: 0.9rem 1rem 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--dark);
+}
+
+.salon-detail-card {
+  width: min(1240px, 92%);
+  margin: 0 auto 4rem;
+  background: var(--white);
+  border-radius: 1.8rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.detail-gallery {
+  padding: 1.2rem;
+  background: var(--gray-light);
+}
+
+.main-image {
+  height: 420px;
+  object-fit: cover;
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.thumb-btn {
+  border: 2px solid transparent;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.thumb-btn:hover {
+  transform: scale(1.03);
+}
+
+.thumb-btn.active {
+  border-color: var(--emerald);
+}
+
+.thumb-btn img {
+  height: 90px;
+  object-fit: cover;
+}
+
+.detail-info {
+  padding: 2rem;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.info-header h2 {
+  font-size: 1.9rem;
+  color: var(--emerald);
+}
+
+.rating {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.info-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 0.2rem;
+}
+
+.info-grid p {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.description {
+  color: #4b5563;
+  margin-bottom: 1.2rem;
+}
+
+.description p + p {
+  margin-top: 0.7rem;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1rem;
+  list-style: none;
+  color: var(--dark);
+}
+
+.services-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.services-list li::before {
+  content: '✔';
+  color: var(--emerald-light);
+  font-weight: 700;
+}
+
+.reviews-section {
+  width: min(1240px, 92%);
+  margin: 0 auto 5rem;
+}
+
+.section-title {
+  margin-bottom: 1.3rem;
+}
+
+.section-title h3 {
+  font-size: 1.6rem;
+  color: var(--emerald);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.review-card {
+  background: var(--white);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-user {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.review-meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.review-stars {
+  color: #f59e0b;
+  margin-bottom: 0.7rem;
+}
+
+.review-text {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+  .salon-selector {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .salon-detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .salon-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid,
+  .services-list,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-info {
+    padding: 1.2rem;
+  }
+}
