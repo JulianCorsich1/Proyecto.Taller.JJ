@@ -351,3 +351,13 @@ img {
     padding: 1.2rem;
   }
 }
+
+#miCarousel {
+  max-width: 900px;        /* o 100% si quieres que ocupe todo */
+  margin: 0 auto;
+}
+
+#miCarousel .carousel-item img {
+  height: 450px;           /* altura fija */
+  object-fit: cover;       /* recorta la imagen sin deformarla */
+}
