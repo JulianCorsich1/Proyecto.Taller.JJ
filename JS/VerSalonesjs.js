@@ -197,3 +197,31 @@ function updateSalonDetails() {
 
 renderSalonCards();
 updateSalonDetails();
+
+ //Validación de contraseñas
+   
+    const form = document.getElementById('newPasswordForm');
+    const newPassword = document.getElementById('newPassword');
+    const confirmPassword = document.getElementById('confirmNewPassword');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', function(e) {
+      if (newPassword.value !== confirmPassword.value) {
+        e.preventDefault(); // Evita que se envíe el formulario
+        errorMessage.style.display = 'block';
+        confirmPassword.classList.add('is-invalid');
+      } else {
+        errorMessage.style.display = 'none';
+        confirmPassword.classList.remove('is-invalid');
+        // Aquí podrías enviar el formulario o mostrar un mensaje de éxito
+        alert('¡Contraseña actualizada correctamente!');
+      }
+    });
+
+    // Oculta el error mientras el usuario escribe
+    confirmPassword.addEventListener('input', function() {
+      if (newPassword.value === confirmPassword.value) {
+        errorMessage.style.display = 'none';
+        confirmPassword.classList.remove('is-invalid');
+      }
+    });
