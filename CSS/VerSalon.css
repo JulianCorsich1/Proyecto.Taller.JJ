@@ -420,3 +420,54 @@ footer {
       border-color: #50C878;
       box-shadow: 0 0 0 0.2rem rgba(80, 200, 120, 0.25);
     }
+    
+.register-card {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-esmeralda {
+      background-color: #50C878;
+      border-color: #50C878;
+      color: white;
+    }
+
+    .btn-esmeralda:hover {
+      background-color: #3cb371;
+      border-color: #3cb371;
+      color: white;
+    }
+
+    .form-control:focus {
+      border-color: #50C878;
+      box-shadow: 0 0 0 0.2rem rgba(80, 200, 120, 0.25);
+    }
+
+    a {
+      color: #50C878;
+    }
+    .recover-card {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-esmeralda {
+      background-color: #50C878;
+      border-color: #50C878;
+      color: white;
+    }
+
+    .btn-esmeralda:hover {
+      background-color: #3cb371;
+      border-color: #3cb371;
+      color: white;
+    }
+
+    .form-control:focus {
+      border-color: #50C878;
+      box-shadow: 0 0 0 0.2rem rgba(80, 200, 120, 0.25);
+    }
