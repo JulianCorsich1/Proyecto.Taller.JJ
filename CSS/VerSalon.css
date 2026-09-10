@@ -361,3 +361,23 @@ img {
   height: 450px;           /* altura fija */
   object-fit: cover;       /* recorta la imagen sin deformarla */
 }
+.carousel-item {
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  backface-visibility: hidden;
+  transition: transform .6s ease-in-out;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
