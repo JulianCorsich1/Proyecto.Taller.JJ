@@ -176,52 +176,160 @@ function updateSalonDetails() {
     });
   });
 
-  reviewsGrid.innerHTML = salon.reviews
-    .map(
-      (review) => `
-        <article class="review-card">
-          <div class="review-top">
-            <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="${review.user}" />
-            <div>
-              <p class="review-user">${review.user}</p>
-              <p class="review-meta">${review.date}</p>
+  if (reviewsGrid) {
+    const listaReviews = salon.reviews || [
+      { user: 'Cliente Satisfecho', stars: '★★★★★', date: 'Reciente', text: 'Hermoso salón, excelente atención del personal y todos los servicios impecables.' }
+    ];
+    reviewsGrid.innerHTML = listaReviews
+      .map(
+        (review) => `
+          <article class="review-card">
+            <div class="review-top">
+              <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="${review.user}" />
+              <div>
+                <p class="review-user">${review.user}</p>
+                <p class="review-meta">${review.date}</p>
+              </div>
             </div>
-          </div>
-          <p class="review-stars">${review.stars}</p>
-          <p class="review-text">${review.text}</p>
-        </article>
-      `
-    )
-    .join('');
+            <p class="review-stars">${review.stars}</p>
+            <p class="review-text">${review.text}</p>
+          </article>
+        `
+      )
+      .join('');
+  }
+
+  // Sincronizar modales con el salón seleccionado
+  const modalSalonTitulo = document.getElementById('reservaSalonTitulo');
+  const reservaSalonId = document.getElementById('reservaSalonId');
+  const resenaSalonId = document.getElementById('resenaSalonId');
+
+  if (modalSalonTitulo) modalSalonTitulo.textContent = salon.name;
+  if (reservaSalonId) reservaSalonId.value = selectedSalonIndex + 1;
+  if (resenaSalonId) resenaSalonId.value = selectedSalonIndex + 1;
+
+  calcularTotalReserva();
+}
+
+function calcularTotalReserva() {
+  const salon = salons[selectedSalonIndex];
+  if (!salon) return;
+  // Extraer número de precio (ej. '$1.800' -> 1800)
+  const basePrice = parseFloat(salon.price.replace(/[^0-9]/g, '')) || 1500;
+  let total = basePrice;
+
+  document.querySelectorAll('.servicio-chk:checked').forEach(chk => {
+    total += parseFloat(chk.dataset.precio || 0);
+  });
+
+  const totalEl = document.getElementById('costoTotalCalculado');
+  if (totalEl) {
+    totalEl.textContent = `$${total.toLocaleString('es-AR')}`;
+  }
+}
+
+// Escuchar cambios en los servicios adicionales para recalcular
+document.querySelectorAll('.servicio-chk').forEach(chk => {
+  chk.addEventListener('change', calcularTotalReserva);
+});
+
+// Manejador del formulario de Reserva (API PHP / SQL)
+const formReserva = document.getElementById('formReserva');
+if (formReserva) {
+  formReserva.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const alerta = document.getElementById('alertaReserva');
+    const formData = new FormData(this);
+    formData.append('accion', 'crear');
+
+    try {
+      const resp = await fetch('../php/api/reservas.php', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await resp.json();
+
+      if (data.exito) {
+        alerta.className = 'alert alert-success';
+        alerta.innerHTML = `<strong>${data.mensaje}</strong><br>Número de Reserva: #${data.id_reserva} | Monto Total: $${data.monto_total}`;
+        alerta.classList.remove('d-none');
+        formReserva.reset();
+        calcularTotalReserva();
+      } else {
+        alerta.className = 'alert alert-danger';
+        alerta.textContent = data.mensaje;
+        alerta.classList.remove('d-none');
+      }
+    } catch (err) {
+      alerta.className = 'alert alert-warning';
+      alerta.textContent = 'Servidor local no disponible. Para guardar en la base de datos MySQL, inicie su servidor local (XAMPP).';
+      alerta.classList.remove('d-none');
+    }
+  });
+}
+
+// Manejador del formulario de Calificaciones (API PHP / SQL)
+const formResena = document.getElementById('formResena');
+if (formResena) {
+  formResena.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const alerta = document.getElementById('alertaResena');
+    const formData = new FormData(this);
+    formData.append('accion', 'guardar_resena');
+
+    try {
+      const resp = await fetch('../php/api/salones.php', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await resp.json();
+
+      if (data.exito) {
+        alerta.className = 'alert alert-success';
+        alerta.textContent = data.mensaje;
+        alerta.classList.remove('d-none');
+        formResena.reset();
+      } else {
+        alerta.className = 'alert alert-danger';
+        alerta.textContent = data.mensaje;
+        alerta.classList.remove('d-none');
+      }
+    } catch (err) {
+      alerta.className = 'alert alert-warning';
+      alerta.textContent = 'Servidor local no disponible. Para guardar en la base de datos MySQL, inicie su servidor local (XAMPP).';
+      alerta.classList.remove('d-none');
+    }
+  });
+}
+
+// Manejo condicional del formulario de cambio de contraseña si existe en la página
+const formPassword = document.getElementById('newPasswordForm');
+if (formPassword) {
+  const newPassword = document.getElementById('newPassword');
+  const confirmPassword = document.getElementById('confirmNewPassword');
+  const errorMessage = document.getElementById('errorMessage');
+
+  formPassword.addEventListener('submit', function(e) {
+    if (newPassword.value !== confirmPassword.value) {
+      e.preventDefault();
+      if (errorMessage) errorMessage.style.display = 'block';
+      confirmPassword.classList.add('is-invalid');
+    } else {
+      if (errorMessage) errorMessage.style.display = 'none';
+      confirmPassword.classList.remove('is-invalid');
+      alert('¡Contraseña actualizada correctamente!');
+    }
+  });
+
+  if (confirmPassword) {
+    confirmPassword.addEventListener('input', function() {
+      if (newPassword.value === confirmPassword.value) {
+        if (errorMessage) errorMessage.style.display = 'none';
+        confirmPassword.classList.remove('is-invalid');
+      }
+    });
+  }
 }
 
 renderSalonCards();
 updateSalonDetails();
-
- //Validación de contraseñas
-   
-    const form = document.getElementById('newPasswordForm');
-    const newPassword = document.getElementById('newPassword');
-    const confirmPassword = document.getElementById('confirmNewPassword');
-    const errorMessage = document.getElementById('errorMessage');
-
-    form.addEventListener('submit', function(e) {
-      if (newPassword.value !== confirmPassword.value) {
-        e.preventDefault(); // Evita que se envíe el formulario
-        errorMessage.style.display = 'block';
-        confirmPassword.classList.add('is-invalid');
-      } else {
-        errorMessage.style.display = 'none';
-        confirmPassword.classList.remove('is-invalid');
-        // Aquí podrías enviar el formulario o mostrar un mensaje de éxito
-        alert('¡Contraseña actualizada correctamente!');
-      }
-    });
-
-    // Oculta el error mientras el usuario escribe
-    confirmPassword.addEventListener('input', function() {
-      if (newPassword.value === confirmPassword.value) {
-        errorMessage.style.display = 'none';
-        confirmPassword.classList.remove('is-invalid');
-      }
-    });
