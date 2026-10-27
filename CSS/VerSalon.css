@@ -394,7 +394,7 @@ footer {
   background-color: #50C878; /* Color esmeralda */
   color: white;              /* Texto blanco para que se lea bien */
   text-align: center;        /* Centra el texto horizontalmente */
-  padding: 40px;
+  padding: 35px;
   width: 100%;
 }
 .login-card {
