@@ -1,7 +1,6 @@
 -- ====================================================================
 -- BASE DE DATOS: misalononline
 -- Proyecto: Plataforma Web de Gestión y Reserva de Salones de Eventos
--- Manual de Usuario de Referencia: "Alquiler de Salon Manual de usuario.docx"
 -- Alumnos: Montoya José y Corsich Julián
 -- Materia: Construcción de Software | Curso: 6°2 | Grupo: 602
 -- Profesor: Rodríguez Lucas
