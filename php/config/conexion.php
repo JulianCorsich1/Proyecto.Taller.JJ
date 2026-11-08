@@ -1,8 +1,7 @@
 <?php
 /**
- * Configuración de Conexión a la Base de Datos con PDO (PHP Data Objects)
+ * Configuración de Conexión a la Base de Datos con PDO }
  * Proyecto: MiSalónOnline
- * Manual de Usuario: "Alquiler de Salon Manual de usuario.docx"
  */
 
 // Parámetros de conexión configurables (valores típicos para XAMPP / Wamp / Servidor Local)
