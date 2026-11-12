@@ -72,7 +72,7 @@
       formData.append('accion', 'login');
 
       try {
-        const response = await fetch('../php/api/auth.php', {
+        const response = await fetch('/Proyecto.JJ/php/api/auth.php', {
           method: 'POST',
           body: formData
         });
